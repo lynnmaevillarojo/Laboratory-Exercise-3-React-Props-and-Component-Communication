@@ -1,16 +1,20 @@
-# React + Vite
+Guide Questions
+1. What is the difference between props and state?
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+Props are used to pass data from a parent component to a child component. State is used to store and manage data that can change within a component. Props are passed from outside, while state is managed inside the component.
 
-Currently, two official plugins are available:
+2. Why can a child component not modify the props it receives?
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+A child component cannot modify the props it receives because props are read-only in React. This helps maintain a clear flow of data between components. If the data needs to change, the parent component should update it and pass the new value to the child.
 
-## React Compiler
+3. How does the onAddToCart callback allow data to flow from child to parent even though props only flow downward?
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+The parent component passes the onAddToCart function to the child through props. When the user clicks the Add to Cart button, the child calls that function and sends the product title back to the parent. The parent then updates the cart information using the received data.
 
-## Expanding the Oxlint configuration
+4. Why is the key prop required when rendering a list with .map()? What could happen if it is missing or duplicated?
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+The key prop helps React identify each item in a list and track changes when items are added, removed, or updated. Each key should be unique to avoid confusion. If keys are missing or duplicated, React may display warnings and update the wrong items or render the list incorrectly.
+
+5. What does the children prop allow you to do that a normal prop does not?
+
+The children prop allows us to place content inside a component's opening and closing tags. It makes the component more flexible because we can add different content, such as labels or badges, without creating a separate prop for each one. For example, we can place a "New" or "Sale" badge inside a ProductCard.
